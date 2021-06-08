@@ -21,27 +21,33 @@ public class ProjetoController {
     return projetoRepository.findAll();
 
     }
-//    @GetMapping("/nome/{projetoNome}")
-//    public List<Projeto> listarPorNome(@PathVariable String projetoNome){
-//        return projetoRepository.findByNome(projetoNome);
-//    }
-//    @GetMapping("/nome/containing/{projetoContaining}")
-//    public List<Projeto> listarNomeContaining(@PathVariable String projetoContaining){
-//        return projetoRepository.findByNomeContaining(projetoContaining);
-//    }
-//
-//    @GetMapping("/nome/{projetoStatus}")
-//    public List<Projeto> listarPorStatus(@PathVariable String projetoStatus){
-//        return projetoRepository.findByNome(projetoStatus);
-//    }
-//
-//    @GetMapping("/{projetoId}")
-//    public ResponseEntity<Projeto> buscar(@PathVariable Long projetoId){
-//
-//        return projetoRepository.findById(projetoId)
-//                .map(projeto -> ResponseEntity.ok(projeto))
-//                .orElse(ResponseEntity.notFound().build());
-//
-//    }
+    @GetMapping("/nome/{projetoNome}")
+    public List<Projeto> listarPorNome(@PathVariable String projetoNome){
+        return projetoRepository.findByNome(projetoNome);
+    }
+
+    @GetMapping("/nome/containing/{projetoContaining}")
+    public List<Projeto> listarNomeContaining(@PathVariable String projetoContaining){
+        return projetoRepository.findByNomeContaining(projetoContaining);
+    }
+
+    @GetMapping("/status/{projetoStatus}")
+    public List<Projeto> listarPorStatus(@PathVariable String projetoStatus){
+        return projetoRepository.findByStatus(projetoStatus);
+    }
+
+    @GetMapping("/seção/{projetoSecao}")
+    public List<Projeto> listarPorSecao(@PathVariable String projetoSecao){
+        return projetoRepository.findBySecao(projetoSecao);
+    }
+
+    @GetMapping("/{projetoId}")
+    public ResponseEntity<Projeto> buscar(@PathVariable Long projetoId){
+
+        return projetoRepository.findById(projetoId)
+                .map(projeto -> ResponseEntity.ok(projeto))
+                .orElse(ResponseEntity.notFound().build());
+
+    }
 
 }

@@ -10,5 +10,7 @@ import java.util.List;
 public interface ProjetoRepository extends JpaRepository<Projeto,Long> {
 
     List<Projeto> findByNome(String nome);
+    List<Projeto> findByStatus(String status);
+    List<Projeto> findBySecao(String secao);
     List<Projeto> findByNomeContaining(String nome);
 }
