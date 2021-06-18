@@ -1,7 +1,9 @@
 package br.com.senai.api.controller;
 
+import br.com.senai.api.model.ProjetoModel;
 import br.com.senai.domain.model.Projeto;
 import br.com.senai.domain.repository.ProjetoRepository;
+import br.com.senai.domain.service.ProjetoService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,39 +16,38 @@ import java.util.List;
 public class ProjetoController {
 
     private ProjetoRepository projetoRepository;
+    private ProjetoService projetoService;
 
     @GetMapping
-    public List<Projeto> listar(){
+    public List<ProjetoModel> listar(){
 
-    return projetoRepository.findAll();
+        return projetoService.listar();
 
     }
     @GetMapping("/nome/{projetoNome}")
-    public List<Projeto> listarPorNome(@PathVariable String projetoNome){
-        return projetoRepository.findByNome(projetoNome);
+    public List<ProjetoModel> listarPorNome(@PathVariable String projetoNome){
+        return projetoService.listarPorNome(projetoNome);
     }
 
     @GetMapping("/nome/containing/{projetoContaining}")
-    public List<Projeto> listarNomeContaining(@PathVariable String projetoContaining){
-        return projetoRepository.findByNomeContaining(projetoContaining);
+    public List<ProjetoModel> listarNomeContaining(@PathVariable String projetoContaining){
+        return projetoService.listarNomeContaining(projetoContaining);
     }
 
     @GetMapping("/status/{projetoStatus}")
-    public List<Projeto> listarPorStatus(@PathVariable String projetoStatus){
+    public List<ProjetoModel> listarPorStatus(@PathVariable String projetoStatus){
         return projetoRepository.findByStatus(projetoStatus);
     }
 
     @GetMapping("/seção/{projetoSecao}")
-    public List<Projeto> listarPorSecao(@PathVariable String projetoSecao){
+    public List<ProjetoModel> listarPorSecao(@PathVariable String projetoSecao){
         return projetoRepository.findBySecao(projetoSecao);
     }
 
     @GetMapping("/{projetoId}")
-    public ResponseEntity<Projeto> buscar(@PathVariable Long projetoId){
+    public ResponseEntity<ProjetoModel> buscar(@PathVariable Long projetoId){
 
-        return projetoRepository.findById(projetoId)
-                .map(projeto -> ResponseEntity.ok(projeto))
-                .orElse(ResponseEntity.notFound().build());
+        return projetoService.buscarProjeto(projetoId);
 
     }
 
