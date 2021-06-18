@@ -36,12 +36,13 @@ public class ProjetoController {
 
     @GetMapping("/status/{projetoStatus}")
     public List<ProjetoModel> listarPorStatus(@PathVariable String projetoStatus){
-        return projetoRepository.findByStatus(projetoStatus);
+        return projetoService.listarPorStatus(projetoStatus);
     }
+
 
     @GetMapping("/seção/{projetoSecao}")
     public List<ProjetoModel> listarPorSecao(@PathVariable String projetoSecao){
-        return projetoRepository.findBySecao(projetoSecao);
+        return projetoService.listarPorSecao(projetoSecao);
     }
 
     @GetMapping("/{projetoId}")

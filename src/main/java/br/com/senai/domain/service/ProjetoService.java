@@ -19,8 +19,6 @@ public class ProjetoService {
     private ProjetoAssembler projetoAssembler;
 
 
-
-
     public Projeto buscar(Long projetoId){
         return projetoRepository.findById(projetoId)
                 .orElseThrow(()->new NegocioException("Projeto não encontrado."));
@@ -69,5 +67,26 @@ public class ProjetoService {
         return projetoAssembler.toCollectionModel(projetoRepository.findByNomeContaining(nomeContaining));
     }
 
+    public List<ProjetoModel> listarPorStatus(String projetoStatus){
+
+        boolean statusValidation = projetoRepository.findByStatus(projetoStatus).isEmpty();
+
+        if (statusValidation) {
+            throw new NegocioException("Não existe nenhum projeto cadastrado com este Status.");
+        }
+
+        return projetoAssembler.toCollectionModel(projetoRepository.findByStatus(projetoStatus));
+    }
+
+    public List<ProjetoModel> listarPorSecao(String projetoSecao){
+
+        boolean secaoValidation = projetoRepository.findBySecao(projetoSecao).isEmpty();
+
+        if (secaoValidation) {
+            throw new NegocioException("Não existe nenhum projeto cadastrado nesta seção.");
+        }
+
+        return projetoAssembler.toCollectionModel(projetoRepository.findBySecao(projetoSecao));
+    }
 
 }

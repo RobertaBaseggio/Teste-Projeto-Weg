@@ -3,11 +3,15 @@ package br.com.senai.api.assembler;
 import br.com.senai.api.model.ProjetoModel;
 import br.com.senai.api.model.input.ProjetoInput;
 import br.com.senai.domain.model.Projeto;
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Component
+@AllArgsConstructor
 public class ProjetoAssembler {
 
     private ModelMapper modelMapper;
